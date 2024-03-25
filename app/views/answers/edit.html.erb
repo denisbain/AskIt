@@ -1,0 +1,16 @@
+<%# render partial: 'questions/shared/errors', locals: { object: @answer } %>
+<%= form_with model: @edit_answer, url: question_answer_path(@question, @edit_answer), data: { "turbo-method": :patch } do |f| %>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :body %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_area :body, class: 'form-control' %>
+    </div>
+  </div>
+
+
+  <%= f.submit "Submit question", class: 'btn btn-primary' %>
+<% end %>

@@ -2,7 +2,17 @@ class AnswersController < ApplicationController
   before_action :set_question!
 
   def edit
-    @answer = @question.answers.order created_at: :desc
+    @edit_answer = @question.answers.find params[:id]
+  end
+
+  def update
+    @edit_answer = @question.answers.update answer_params
+    if flash[:success] = 'Answer updated'
+    redirect_to question_path(@question)
+    else
+      @answers = @question.answers.order created_at: :desc
+      render 'questions/show'
+    end
   end
   def create
     @answer = @question.answers.build answer_params

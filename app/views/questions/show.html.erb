@@ -17,7 +17,7 @@
 
 <%= render partial: 'questions/shared/errors', locals: { object: @answer } %>
 
-<%= form_with model: [@question, @answer], data: { turbo: false } do |f| %>
+<%= form_with model: [@question, @answer ], data: { turbo: false } do |f| %>
 
   <div class="mb-3 row">
     <div class="col-sm-2 col-form-label">
