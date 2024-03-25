@@ -11,3 +11,41 @@
 <%= link_to "Show", question_path(@question), class: 'btn btn-primary' %>
 <%= link_to "Edit", edit_question_path(@question), class: 'btn btn-secondary' %>
 <%= link_to "Destroy", question_path(@question), data: { "turbo-method": :delete }, class: 'btn btn-danger' %>
+
+<hr class="my-3">
+<h2>Write your answer</h2>
+
+<%= render partial: 'questions/shared/errors', locals: { object: @answer } %>
+
+<%= form_with model: [@question, @answer], data: { turbo: false } do |f| %>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :body %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_area :body, class: 'form-control' %>
+    </div>
+  </div>
+
+
+  <%= f.submit "Submit question", class: 'btn btn-primary' %>
+<% end %>
+
+<h2 class="mt-5">Answers</h2>
+  <article class="mb-3">
+  <% @answers.each do |answer| %>
+    <time datetime="<%= answer.formatted_created_at%>">
+      <%= answer.formatted_created_at %>
+    </time>
+
+    <p>
+      <%= answer.body %>
+    </p>
+
+      <%= link_to "Edit", edit_question_answer_path(@question, answer), class: 'btn btn-secondary btn-sm' %>
+      <%= link_to "Delete", question_answer_path(@question, answer), class: "btn btn-danger btn-sm",
+                data: { "turbo-method": :delete } %>
+      </article>
+<% end %>
