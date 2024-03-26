@@ -6,16 +6,18 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = @question.answers.update answer_params
-    if flash[:success] = 'Answer updated'
-    redirect_to question_path(@question)
+
+    if @answer.update answer_params
+      flash[:success] = 'Answer updated'
+    redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
     else
       @answers = @question.answers.order created_at: :desc
       render 'questions/show'
     end
   end
   def create
-    if @answer.update answer_params
+    @answer = @question.answers.build answer_params
+    if @answer.save
       flash[:success] = "Answer created!"
       redirect_to question_path(@question)
     else
@@ -25,7 +27,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    answer.destroy
+    @answer.destroy
     flash[:success] = "Answer deleted!"
     redirect_to question_path(@question)
 
