@@ -21,18 +21,5 @@
 <h2 class="mt-5">Answers</h2>
 
 
-  <% @answers.each do |answer| %>
-    <article class="mb-3" id="answer-<%= answer.id %>">
-    <time datetime="<%= answer.formatted_created_at%>">
-      <%= answer.formatted_created_at %>
-    </time>
-
-    <p>
-      <%= answer.body %>
-    </p>
-
-      <%= link_to "Edit", edit_question_answer_path(@question, answer), class: 'btn btn-secondary btn-sm' %>
-      <%= link_to "Delete", question_answer_path(@question, answer), class: "btn btn-danger btn-sm",
-                data: { "turbo-method": :delete } %>
-      </article>
-<% end %>
+  <%= render partial: 'answers/answer', collection: @answers,
+  as: :answer, locals: {question: @question} %>
