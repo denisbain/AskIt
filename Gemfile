@@ -30,7 +30,7 @@ gem 'sassc', '~> 2.0'
 
 gem 'cssbundling-rails'
 
-gem 'kaminari', '~> 1.2'
+gem 'pagy', '~> 7.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
